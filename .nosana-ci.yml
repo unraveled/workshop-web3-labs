@@ -3,7 +3,7 @@ nosana:
   description: Build, Test and Deploy software
 
 global:
-  image: alpine
+  image: node:17
   trigger:
     push:
       branches:
@@ -13,19 +13,17 @@ jobs:
 
   - name: build
     commands:
-      - echo "building..."
+      - npm ci
+      - npx hardhat compile
     artifacts:
-      - name: my-build
-        path: .
-
+      - name: node_modules
+      - name: artifacts
+        
   - name: test
+    environment:
+      REPORT_GAS: "true"
     commands:
-      - echo "testing..."
+      - npx hardhat test
     resources:
-      - name: my-build
-
-  - name: deploy
-    commands:
-      - echo "deploying..."
-    resources:
-      - name: my-build
+      - name: node_modules
+      - name: artifacts
