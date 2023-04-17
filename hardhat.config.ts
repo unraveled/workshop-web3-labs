@@ -6,7 +6,7 @@ const config: HardhatUserConfig = {
   networks: {
     polygon_mumbai: {
       url: "https://rpc-mumbai.maticvigil.com",
-      accounts: [process.env.PRIVATE_KEY || '0'.repeat(64)]
+      accounts: [process.env.PRIVATE_KEY === undefined ? '0'.repeat(64) : process.env.PRIVATE_KEY]
     }
   }
 }
