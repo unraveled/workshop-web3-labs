@@ -29,7 +29,7 @@ jobs:
       - name: artifacts
 
   - name: deploy
-    SECRETS:
+    secrets:
       - PRIVATE_KEY
     commands:
       - npx hardhat run scripts/deploy.ts --network polygon_mumbai
